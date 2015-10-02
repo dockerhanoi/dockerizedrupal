@@ -1,0 +1,44 @@
+#
+# Source code address
+# https://hub.docker.com/u/tranhuucuong91/
+#
+
+drupal:
+    image: tranhuucuong91/drupal:7
+    links:
+        - mariadb
+        #- redis
+    ports:
+        - "8080:80"
+    #volumes:
+    #- ./drupal-data/:/drupal-data/
+    #environment:
+        #- TZ=Asia/Saigon
+    hostname: drupal
+    domainname: coclab.lan
+    cpu_shares: 512             # 0.5 CPU
+    mem_limit: 536870912        # 512 MB RAM
+    #privileged: true
+    #restart: always
+    #stdin_open: true
+    #tty: true
+
+mariadb:
+    image: mariadb:10.0
+    #ports:
+        #- "3306:3306"
+    volumes:
+        - ./mysql-data/:/var/lib/mysql/
+    environment:
+        - MYSQL_ROOT_PASSWORD=drupal@secret
+        - MYSQL_USER=drupal
+        - MYSQL_PASSWORD=drupal@123
+        - MYSQL_DATABASE=drupal
+    hostname: mariadb
+    domainname: coclab.lan
+    cpu_shares: 512             # 0.5 CPU
+    mem_limit: 536870912        # 512 MB RAM
+    # privileged: true
+    # restart: always
+    # stdin_open: true
+    # tty: true

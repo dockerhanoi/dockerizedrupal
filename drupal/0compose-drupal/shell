@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#version=latest
+container_name=0composedrupal_drupal_1
+
+# check container exists
+docker ps -a | awk '{print $NF}' | grep ${container_name} &>/dev/null
+
+if [[ $? != 0 ]]; then
+    echo "You need create docker container first"
+    echo "Using docker-compose up -d or docker-compose start"
+
+    #docker run -it \
+        #--name ${container_name} \
+        #-v `pwd`/data:/data \
+        #-p 80:80 \
+        #--hostname drupal.coclab.lan \
+        #tranhuucuong91/drupal:${version} /bin/bash
+else
+    # check container is running
+    docker ps | awk '{print $NF}' | grep ${container_name} &>/dev/null
+
+    if [[ $? != 0 ]]; then
+        docker start ${container_name}
+    fi
+
+    docker exec -it ${container_name} bash
+fi
+
+#sudo chown coc:coc -R ~/.ivy2/
+
