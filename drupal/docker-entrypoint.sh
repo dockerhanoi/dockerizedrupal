@@ -85,13 +85,13 @@ if [ "$1" = 'apache2-foreground' ]; then
         echo "drush install new site"
 
         drush --y si ${DRUPAL_PROFILE} \
-        --db-url=${DB_PROTO}://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME} \
-        --db-prefix=${DB_TABLE_PREFIX} \
-        --clean-url=0 \
-        --site-name=${DRUPAL_SITE_NAME} \
-        --account-name=${DRUPAL_USER} \
-        --account-pass=${DRUPAL_PASSWORD} \
-        --account-mail=${DRUPAL_USER_EMAIL} || true
+            --db-url=${DB_PROTO}://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME} \
+            --db-prefix=${DB_TABLE_PREFIX} \
+            --clean-url=0 \
+            --site-name=${DRUPAL_SITE_NAME} \
+            --account-name=${DRUPAL_USER} \
+            --account-pass=${DRUPAL_PASSWORD} \
+            --account-mail=${DRUPAL_USER_EMAIL} || true
     fi
 
     source /etc/apache2/envvars
