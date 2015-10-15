@@ -10,7 +10,7 @@ drupal:
     links:
         - mysql:mysql
     ports:
-        - "81:80"
+        - "80:80"
     #volumes:
     #- ./drupal-data/:/drupal-data/
     #environment:
