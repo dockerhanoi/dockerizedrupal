@@ -1,44 +1,53 @@
 #
 # Source code address
-# https://hub.docker.com/u/tranhuucuong91/
+# https://hub.docker.com/r/tranhuucuong91/drupal/
 #
-
+# User: admin
+# Password: admin
+#
 drupal:
-    image: tranhuucuong91/drupal:7
+    image: tranhuucuong91/drupal:drush-7
     links:
-        - mariadb
-        #- redis
+        - mysql:mysql
     ports:
-        - "8080:80"
+        - "81:80"
     #volumes:
     #- ./drupal-data/:/drupal-data/
     #environment:
         #- TZ=Asia/Saigon
+        # - DRUPAL_PROFILE=minimal
+        # - DRUPAL_SITE_NAME=Hello
+        # - DRUPAL_USER=admin
+        # - DRUPAL_PASSWORD=admin
+        # - DRUPAL_USER_EMAIL=admin@example.com
     hostname: drupal
     domainname: coclab.lan
     cpu_shares: 512             # 0.5 CPU
     mem_limit: 536870912        # 512 MB RAM
     #privileged: true
-    #restart: always
+    restart: always
     #stdin_open: true
     #tty: true
 
-mariadb:
-    image: mariadb:10.0
-    #ports:
-        #- "3306:3306"
+mysql:
+    image: mysql:5.6
     volumes:
         - ./mysql-data/:/var/lib/mysql/
+        #- ./mysql-init-data/:/docker-entrypoint-initdb.d/
     environment:
-        - MYSQL_ROOT_PASSWORD=drupal@secret
+        #- TZ=Asia/Saigon
+        - MYSQL_ROOT_PASSWORD=drupalsecret
         - MYSQL_USER=drupal
-        - MYSQL_PASSWORD=drupal@123
+        - MYSQL_PASSWORD=drupal123
         - MYSQL_DATABASE=drupal
-    hostname: mariadb
+    #ports:
+        #- "3306:3306"
+    hostname: mysql
     domainname: coclab.lan
     cpu_shares: 512             # 0.5 CPU
     mem_limit: 536870912        # 512 MB RAM
     # privileged: true
-    # restart: always
+    restart: always
     # stdin_open: true
     # tty: true
+

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #version=latest
-container_name=0composedrupal_drupal_1
+container_name=0compose_drupal_1
 
 # check container exists
 docker ps -a | awk '{print $NF}' | grep ${container_name} &>/dev/null
