@@ -78,7 +78,6 @@ function app_init() {
     # due to the nature of docker and its use cases, we allow some time
     # for the database server to come online.
 
-    #sleep ${WAIT_TIME}
     case ${DB_TYPE} in
         mysql)
             prog="mysqladmin -h ${DB_HOST} -P ${DB_PORT} -u ${DB_USER} ${DB_PASS:+-p$DB_PASS} status"
